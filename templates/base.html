@@ -1,0 +1,41 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock title %}</title>
+    <!-- site favicon -->
+    {% include "style.html" %}
+</head>
+
+<body>
+
+    <!-- preloader start -->
+    <div id="preloader"></div>
+    <!-- preloader end -->
+
+    <!--  header-section start  -->
+    {% include "header.html" %}
+    <!--  header-section end  -->
+
+    {% block main %} {% endblock main %}
+    <!-- footer-section start -->
+    {% include "footer.html" %}
+    <!-- footer-section end -->
+
+
+    <!-- scroll-to-top start -->
+    <div class="scroll-to-top">
+        <span class="scroll-icon">
+      <i class="fa fa-rocket"></i>
+    </span>
+    </div>
+    <!-- scroll-to-top end -->
+
+    <!-- jquery js link -->
+    {% include "script.html" %}
+</body>
+
+</html>
