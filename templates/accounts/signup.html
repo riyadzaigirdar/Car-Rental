@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %}
     Registration
 {% endblock title %}
@@ -31,7 +31,7 @@
           <div class="registration-block text-center">
             <div class="registration-block-inner">
               <h3 class="title">create  your account</h3>
-              <form class="registration-form">
+              <form class="registration-form" action="{% url 'accounts:signup' %}" method="POST">
                 <div class="frm-group">
                   <input type="text" name="f-name" id="f-name" placeholder="First Name">
                 </div>
@@ -50,8 +50,10 @@
                 <div class="frm-group">
                   <input type="password" name="re-pass" id="re-pass" placeholder="Enter Re-Password">
                 </div>
+                {% csrf_token %}
+                  {{ form|crispy }}
                 <div class="frm-group">
-                  <input type="submit" value="create new account">
+                  <button type="submit">Create New Account</button>
                 </div>
                 <div class="frm-group">
                   <input type="checkbox" name="checkbox" id="checkbox" value="yes">

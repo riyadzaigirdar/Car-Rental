@@ -1,18 +1,23 @@
- {% extends 'base.html' %} {% load static %} {% block title %} Car Rental Service {% endblock title %} {% block main %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Car Rental Service {% endblock title %}
+
+{% block main %}
 <!-- banner-section start  -->
-<section class="banner-section bg_img" data-background="{% static 'images/banner.jpg' %}">
+<section class="banner-section bg_img" data-background="{{ banner.background_image.url }}">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-7">
                 <div class="banner-content">
-                    <h1 class="title">find your own car</h1>
-                    <p>Lorem ipsum dolor sit amet, congue placerat nec. Leo faubus sed eleifend bibendum neque vehiculanulla. Lorem ipsum dolor sit amet, congue placerat nec. Leo faubus sed eleifend bibendum neque vehiculanulla.</p>
+                    <h1 class="title">{{ banner.title }}</h1>
+                    <p>{{ banner.description }}</p>
                     <a href="#0" class="cmn-btn">see all vehicles</a>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="banner-img">
-                    <img src="{% static 'images/elements/banner-man.png' %}" alt="image">
+                    <img src="{{ banner.foreground_image.url }}" alt="image">
                 </div>
             </div>
         </div>
@@ -31,13 +36,13 @@
                         <div class="row">
                             <div class="col-lg-12 form-group">
                                 <select>
-                <option value="1" selected>Choose Your Car Type</option>
-                <option value="2">Car type one</option>
-                <option value="3">Car type Two</option>
-                <option value="4">Car type Three</option>
-                <option value="5">Car type Four</option>
-                <option value="6">Car type Five</option>
-              </select>
+                                    <option value="1" selected>Choose Your Car Type</option>
+                                    <option value="2">Car type one</option>
+                                    <option value="3">Car type Two</option>
+                                    <option value="4">Car type Three</option>
+                                    <option value="5">Car type Four</option>
+                                    <option value="6">Car type Five</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -53,21 +58,25 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <i class="fa fa-calendar"></i>
-                                <input type='text' class='form-control has-icon datepicker-here' data-language='en' placeholder="Pickup Date">
+                                <input type='text' class='form-control has-icon datepicker-here' data-language='en'
+                                       placeholder="Pickup Date">
                             </div>
                             <div class="form-group col-md-6">
                                 <i class="fa fa-clock-o"></i>
-                                <input type="text" name="timepicker" class="form-control has-icon timepicker" placeholder="Pickup Time">
+                                <input type="text" name="timepicker" class="form-control has-icon timepicker"
+                                       placeholder="Pickup Time">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <i class="fa fa-calendar"></i>
-                                <input type='text' class='form-control has-icon datepicker-here' data-language='en' placeholder="Drop Off Date">
+                                <input type='text' class='form-control has-icon datepicker-here' data-language='en'
+                                       placeholder="Drop Off Date">
                             </div>
                             <div class="form-group col-md-6">
                                 <i class="fa fa-clock-o"></i>
-                                <input type="text" name="timepicker" class="form-control has-icon timepicker" placeholder="Drop Off Time">
+                                <input type="text" name="timepicker" class="form-control has-icon timepicker"
+                                       placeholder="Drop Off Time">
                             </div>
                         </div>
                         <button type="submit" class="cmn-btn btn-radius">Reservation</button>
@@ -85,41 +94,23 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="section-header text-center">
-                    <h2 class="section-title">our awsome features</h2>
-                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis in tellu.</p>
+                    <h2 class="section-title">{{ feature.feature_title }}</h2>
+                    <p>{{ feature.feature_description }}</p>
                 </div>
             </div>
         </div>
         <div class="row mb-none-30">
+            {% for item in feature_items %}
             <div class="col-lg-4 col-sm-6">
                 <div class="icon-item text-center">
-                    <div class="icon"><i class="fa fa-user"></i></div>
+                    <div class="icon"><i class="{{ item.feature_icon_name}}"></i></div>
                     <div class="content">
-                        <h4 class="title">expert drivers</h4>
-                        <p>Tristique ac felis ultr egestelend sed metus eloo dui, et vestulum rutrum nisl tempus </p>
+                        <h4 class="title">{{ item.feature_item_title}}</h4>
+                        <p>{{ item.feature_item_description}}</p>
                     </div>
                 </div>
             </div>
-            <!-- icon-item end -->
-            <div class="col-lg-4 col-sm-6">
-                <div class="icon-item text-center">
-                    <div class="icon"><i class="fa fa-rocket"></i></div>
-                    <div class="content">
-                        <h4 class="title">fast services</h4>
-                        <p>Tristique ac felis ultr egestelend sed metus eloo dui, et vestulum rutrum nisl tempus </p>
-                    </div>
-                </div>
-            </div>
-            <!-- icon-item end -->
-            <div class="col-lg-4 col-sm-6">
-                <div class="icon-item text-center">
-                    <div class="icon"><i class="fa fa-volume-control-phone"></i></div>
-                    <div class="content">
-                        <h4 class="title">customer support</h4>
-                        <p>Tristique ac felis ultr egestelend sed metus eloo dui, et vestulum rutrum nisl tempus </p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
             <!-- icon-item end -->
         </div>
     </div>
@@ -135,7 +126,9 @@
                 <div class="block-area">
                     <div class="block-header">
                         <h2 class="title">Well Come to Renten For Rent </h2>
-                        <p>Lorem ipsum dolor sit amet, sit lectus risus dis aptent, vitae odio nec. Justo volutpat rutrum purus, augue cursus, turpis felis nonummy nisl. Vel justrus sed volutpat, tristique tempor scelerisque dictum dui donec urna, consequat
+                        <p>Lorem ipsum dolor sit amet, sit lectus risus dis aptent, vitae odio nec. Justo volutpat
+                            rutrum purus, augue cursus, turpis felis nonummy nisl. Vel justrus sed volutpat, tristique
+                            tempor scelerisque dictum dui donec urna, consequat
                             scelerisque eu ut, ornare ut. Rutrum eget</p>
                     </div>
                     <div class="block-body">
@@ -159,7 +152,8 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">choose awsome rental car</h2>
-                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis in tellu.</p>
+                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis
+                        in tellu.</p>
                 </div>
             </div>
         </div>
@@ -289,8 +283,12 @@
                 <div class="block-area">
                     <div class="block-header">
                         <h2 class="title">We provided all Kind of Rental Services</h2>
-                        <p>Feugiat tortor mauris, vitae magna parturient nec, velit bibensectetuer eros urna nunc suspendisse. Elit odio lobortis adipiscing tristiqucursus eu, hendrerit nulla voluptatem wisi Lorem ipsum dolor sit amet, velum magna, fusce
-                            ut dolor sit sed et habitant. Sociis tincidunt velit. Collis dictum fames mauris magna, nulla nunc amet, in magna. Amet nmmy eget et, orci nunc nam, condimentum donec tortor et magna </p>
+                        <p>Feugiat tortor mauris, vitae magna parturient nec, velit bibensectetuer eros urna nunc
+                            suspendisse. Elit odio lobortis adipiscing tristiqucursus eu, hendrerit nulla voluptatem
+                            wisi Lorem ipsum dolor sit amet, velum magna, fusce
+                            ut dolor sit sed et habitant. Sociis tincidunt velit. Collis dictum fames mauris magna,
+                            nulla nunc amet, in magna. Amet nmmy eget et, orci nunc nam, condimentum donec tortor et
+                            magna </p>
                     </div>
                     <div class="block-body">
                         <div class="row">
@@ -337,7 +335,8 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">expert support team</h2>
-                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis in tellu.</p>
+                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis
+                        in tellu.</p>
                 </div>
             </div>
         </div>
@@ -402,7 +401,8 @@
 <!-- team-section end -->
 
 <!-- testimonial-section start -->
-<section class="testimonial-section overlay-black pt-120 pb-120 bg_img" data-background="{% static 'images/testimonial-bg.jpg' %}">
+<section class="testimonial-section overlay-black pt-120 pb-120 bg_img"
+         data-background="{% static 'images/testimonial-bg.jpg' %}">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -414,7 +414,9 @@
                             <span class="designation">business man</span>
                         </div>
                         <div class="testimonial-item--body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
+                                viverra maecenas accumsan lacus vel facilisis.
                             </p>
                         </div>
                         <div class="testimonial-item--ratings">
@@ -433,7 +435,9 @@
                             <span class="designation">business man</span>
                         </div>
                         <div class="testimonial-item--body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
+                                viverra maecenas accumsan lacus vel facilisis.
                             </p>
                         </div>
                         <div class="testimonial-item--ratings">
@@ -452,7 +456,9 @@
                             <span class="designation">business man</span>
                         </div>
                         <div class="testimonial-item--body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
+                                viverra maecenas accumsan lacus vel facilisis.
                             </p>
                         </div>
                         <div class="testimonial-item--ratings">
@@ -478,7 +484,8 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">latest news & tips</h2>
-                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis in tellu.</p>
+                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis
+                        in tellu.</p>
                 </div>
             </div>
         </div>
@@ -493,7 +500,8 @@
                     </div>
                     <div class="content">
                         <h5 class="post-title"><a href="#0">Elementum cutur. Velit sed. Congue</a></h5>
-                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and overviews</p>
+                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and
+                            overviews</p>
                         <a href="#0" class="text-btn">read more</a>
                     </div>
                 </div>
@@ -508,7 +516,8 @@
                     </div>
                     <div class="content">
                         <h5 class="post-title"><a href="#0">Aliquam id arccrupti eget velit, est vitae</a></h5>
-                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and overviews</p>
+                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and
+                            overviews</p>
                         <a href="#0" class="text-btn">read more</a>
                     </div>
                 </div>
@@ -523,7 +532,8 @@
                     </div>
                     <div class="content">
                         <h5 class="post-title"><a href="#0">Quam magna iugiat urna in feugiat</a></h5>
-                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and overviews</p>
+                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and
+                            overviews</p>
                         <a href="#0" class="text-btn">read more</a>
                     </div>
                 </div>
@@ -537,8 +547,9 @@
                         </ul>
                     </div>
                     <div class="content">
-                        <h5 class="post-title"><a href="#0">consectetu  volutpat vitae alias ante leo</a></h5>
-                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and overviews</p>
+                        <h5 class="post-title"><a href="#0">consectetu volutpat vitae alias ante leo</a></h5>
+                        <p>Lorem ipsum dolor simaillan suspendisse nunc enim lupnar nostra mollis nonummy thiking and
+                            overviews</p>
                         <a href="#0" class="text-btn">read more</a>
                     </div>
                 </div>

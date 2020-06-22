@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #local app
     'home',
     'accounts',
+    'crispy_forms',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -128,3 +129,5 @@ os.path.join(BASE_DIR, 'static')
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

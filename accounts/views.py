@@ -1,7 +1,47 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from django.views.generic import CreateView, FormView
+from accounts.forms import SignUpForm
+from django.urls import reverse_lazy
+from accounts.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
-class SignUp(TemplateView):
+class SignUp(CreateView):
+    model = User
+    form_class = SignUpForm
     template_name = "accounts/signup.html"
+    success_url = reverse_lazy('home:home')
+
+    def form_valid(self, form):
+        form.save()
+        return super(SignUp, self).form_valid(form)
+
+
+class LoginView(FormView):
+    form_class = AuthenticationForm
+    template_name = 'accounts/login.html'
+    success_url = reverse_lazy('home:home')
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(self.request, user)
+        return super(LoginView, self).form_valid(form)
+
+
+class LogoutView(LoginRequiredMixin, FormView):
+    form_class = AuthenticationForm
+    template_name = 'app_login/login.html'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('accounts:login')
+
+
