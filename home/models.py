@@ -29,7 +29,6 @@ class Banner(models.Model):
 class Feature(models.Model):
     feature_title = models.CharField(max_length=100, blank=True)
     feature_description = models.TextField()
-    feature_image = models.ImageField(upload_to='feature')
 
     def __str__(self):
         return self.feature_title
