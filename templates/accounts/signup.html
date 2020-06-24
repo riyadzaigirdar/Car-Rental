@@ -33,27 +33,23 @@
               <h3 class="title">create  your account</h3>
               <form class="registration-form" action="{% url 'accounts:signup' %}" method="POST">
                 <div class="frm-group">
-                  <input type="text" name="f-name" id="f-name" placeholder="First Name">
+                  {{ form.email }}
                 </div>
                 <div class="frm-group">
-                  <input type="text" name="l-name" id="l-name" placeholder="Last Name">
+                  {{ form.username }}
                 </div>
                 <div class="frm-group">
-                  <input type="email" name="name" id="name" placeholder="Your Email">
+                  {{ form.phone }}
                 </div>
                 <div class="frm-group">
-                  <input type="url" name="website" id="website" placeholder="Your Website">
+                  {{ form.password1 }}
                 </div>
                 <div class="frm-group">
-                  <input type="password" name="pass" id="pass" placeholder="Your Password">
-                </div>
-                <div class="frm-group">
-                  <input type="password" name="re-pass" id="re-pass" placeholder="Enter Re-Password">
+                  {{ form.password2 }}
                 </div>
                 {% csrf_token %}
-                  {{ form|crispy }}
                 <div class="frm-group">
-                  <button type="submit">Create New Account</button>
+                  <button type="submit" class="btn btn-danger btn-block">Create New Account</button>
                 </div>
                 <div class="frm-group">
                   <input type="checkbox" name="checkbox" id="checkbox" value="yes">
