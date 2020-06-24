@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import User
-from django.forms import EmailInput, PasswordInput, TextInput, ModelForm
+from django.forms import PasswordInput
 
 
 class SignUpForm(UserCreationForm):
