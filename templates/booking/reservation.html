@@ -28,22 +28,25 @@
             </div>
             <div class="content">
               <div class="content-block">
-                <h3 class="car-name">forester subar</h3>
-                <span class="price">Start form $20 per day</span>
-                <p>Lorem ipsum dolor sit amet, urna sit sociis lacus sem turpis magna, montes euismod eros nu dignsim etiam elementum sed tellus sed. Sollicitudin occaecati ut bibendum vitae vehicula adipiscing, partent justo labore, maecenas at aliquam eum. Eleifend suspendisse enim integer, ipsum mauris curabitur nulla ut sit, pede aenean, lacus sed. Dignissim wisi turpis pharetra sapien.</p>
+                <h3 class="car-name">{{ car.name }}</h3>
+                <span class="price">Start form ${{ car.price_per_day }} per day</span>
+                <p>{{ car.description }}</p>
               </div>
               <form class="reservation-form" action="" method="POST">
                 {% csrf_token %}
                 <div class="content-block">
                   <h3 class="title">extra benifit and fee</h3>
                   <div class="row">
+                    {% for benifit in form.extra_benifits %}
                     <div class="col-lg-6">
                       <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">television   $05 per day</label>
+                        {{ benifit }}
+                        <!--<input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">television   $05 per day</label>-->
                       </div>
                     </div>
-                    <div class="col-lg-6">
+                    {% endfor %}
+                    <!--<div class="col-lg-6">
                       <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck2">
                         <label class="form-check-label" for="exampleCheck2">childen seat</label>
@@ -72,7 +75,7 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck6">
                         <label class="form-check-label" for="exampleCheck6">security & safety</label>
                       </div>
-                    </div>
+                    </div>-->
                   </div>
                   <div class="row">
                     <div class="form-group col-md-6">

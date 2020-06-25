@@ -13,5 +13,5 @@ class SignUpForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({'placeholder': 'Email'})
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
         self.fields['phone'].widget.attrs.update({'placeholder': 'Phone'})
-        self.fields['password1'].widget=PasswordInput(attrs={'placeholder': 'Password'})
-        self.fields['password2'].widget=PasswordInput(attrs={'placeholder': 'Repeat Password'})
+        self.fields['password1'].widget = PasswordInput(attrs={'placeholder': 'Password'})
+        self.fields['password2'].widget = PasswordInput(attrs={'placeholder': 'Repeat Password'})
