@@ -13,7 +13,6 @@ class BookingView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print("error:",self.kwargs['pk'])
         context['car'] = Car.objects.get(pk=self.kwargs['pk'])
         return context
 
@@ -22,3 +21,5 @@ class BookingView(CreateView):
         booking_obj.customer = self.request.user
         booking_obj.save()
         super(BookingView, self).form_valid(form)
+
+    
