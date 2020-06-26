@@ -21,5 +21,5 @@ class BookingCarForm(ModelForm):
             {'class': 'form-control has-icon datepicker-here', 'placeholder': 'Drop Off Date'})
         self.fields['drop_off_time'].widget.attrs.update(
             {'class': 'form-control has-icon timepicker', 'placeholder': 'Drop Off Time'})
-        self.fields["extra_benifits"].widget = CheckboxSelectMultiple(attrs={'class': 'form-check-input'})
-        self.fields["extra_benifits"].queryset = ExtraBenifit.objects.all()
+        #self.fields["extra_benifits"].queryset = ExtraBenifit.objects.all()
+        #self.fields["extra_benifits"].widget = CheckboxSelectMultiple(attrs={'class': 'form-check-input'})
