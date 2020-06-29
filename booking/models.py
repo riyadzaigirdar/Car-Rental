@@ -37,7 +37,7 @@ class BookingCar(models.Model):
     )
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer_profile')
     payment_method = models.CharField(max_length=15, choices=PAYMENT_METHOD_CHOICES, default='paypal', blank=True, null=True)
-    additional_info = models.TextField()
+    additional_info = models.TextField(blank=True, null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='booking_car')
     extra_benifits = models.ManyToManyField(ExtraBenifit, related_name='extra_benifit')
     pickup_location = models.CharField(max_length=100, blank=True, null=True)

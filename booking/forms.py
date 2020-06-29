@@ -1,11 +1,10 @@
 from django.forms import ModelForm, MultipleChoiceField,CheckboxSelectMultiple
 from booking.models import BookingCar, ExtraBenifit
+from django.forms.models import ModelMultipleChoiceField
 
 
 class BookingCarForm(ModelForm):
-    class Meta:
-        model = BookingCar
-        exclude = ['ordered', 'delevered']
+    
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,3 +22,9 @@ class BookingCarForm(ModelForm):
             {'class': 'form-control has-icon timepicker', 'placeholder': 'Drop Off Time'})
         #self.fields["extra_benifits"].queryset = ExtraBenifit.objects.all()
         #self.fields["extra_benifits"].widget = CheckboxSelectMultiple(attrs={'class': 'form-check-input'})
+        self.fields['extra_benifits'] = ModelMultipleChoiceField(queryset=ExtraBenifit.objects.all(),widget=CheckboxSelectMultiple())
+        #self.fields['extra_benifits'].widget = CheckboxSelectMultiple()
+
+    class Meta:
+        model = BookingCar
+        exclude = ['ordered', 'delevered']

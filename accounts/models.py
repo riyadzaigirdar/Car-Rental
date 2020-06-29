@@ -79,8 +79,8 @@ class UserProfile(models.Model):
         verbose_name = "UserProfile"
         verbose_name_plural = "UserProfiles"
 
-    def __str__(self):
-        return self.first_name + "'s profile"
+    #def __str__(self):
+        #return self.first_name + "'s profile"
 
     @receiver(post_save, sender=User)
     def create_profile(sender, instance, created, **kwargs):
