@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+import re
 # Create your views here.
 
 class SignUp(CreateView):
@@ -29,10 +29,16 @@ class LoginView(FormView):
     def form_valid(self, form):
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
+        next = self.request.POST['next']
         user = authenticate(username=username, password=password)
 
         if user is not None:
             login(self.request, user)
+            if next is not None:
+                next = re.sub(r'\s+', '', next)
+                next = next[22:]
+                super(LoginView, self).form_valid(form)
+                return redirect(next)
         return super(LoginView, self).form_valid(form)
 
 
