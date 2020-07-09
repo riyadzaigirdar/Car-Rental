@@ -11,6 +11,7 @@ class BookingView(LoginRequiredMixin, CreateView):
     form_class = BookingCarForm
     template_name = 'booking/reservation.html'
     success_url = 'home:home'
+    #redirect_field_name = 'next'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
