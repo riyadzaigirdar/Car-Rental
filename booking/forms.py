@@ -22,7 +22,7 @@ class BookingCarForm(ModelForm):
             {'class': 'form-control has-icon timepicker', 'placeholder': 'Drop Off Time'})
         #self.fields["extra_benifits"].queryset = ExtraBenifit.objects.all()
         #self.fields["extra_benifits"].widget = CheckboxSelectMultiple(attrs={'class': 'form-check-input'})
-        self.fields['extra_benifits'] = ModelMultipleChoiceField(queryset=ExtraBenifit.objects.all(),widget=CheckboxSelectMultiple())
+        #self.fields['extra_benifits'] = ModelMultipleChoiceField(queryset=ExtraBenifit.objects.all(),widget=CheckboxSelectMultiple())
         #self.fields['extra_benifits'].widget = CheckboxSelectMultiple()
 
     class Meta:

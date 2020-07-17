@@ -4,7 +4,6 @@
 
 
 
-  {% if request.user.customer_profile.all %}
     <!-- inner-apge-banner start -->
 <section class="inner-page-banner bg_img overlay-3" data-background="{% static 'images/inner-page-bg.jpg' %}">
   <div class="container">
@@ -35,49 +34,22 @@
               <span class="price">Start form ${{ car.price_per_day }} per day</span>
               <p>{{ car.description }}</p>
             </div>
-            <form class="reservation-form" action="" method="POST">
+            <form class="reservation-form" action="{% url 'booking:add_reservation' pk=bookingcar.pk %}" method="post">
               {% csrf_token %}
               <div class="content-block">
                 <h3 class="title">extra benifit and fee</h3>
                 <div class="row">
-
+                  {% for benifit in benifits %}
                   <div class="col-lg-6">
                     <div class="form-group form-check">
 
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">television $05 per day</label>
+                      <input type="checkbox" class="form-check-input" id="{{ benifit.id }}" name="extra_benifit" value="{{ benifit }}" > 
+                      <label class="form-check-label" for="{{ benifit.id }}">{{ benifit.name }} Cost ${{ benifit.cost }} </label>
+                      
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                      <label class="form-check-label" for="exampleCheck2">childen seat</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck3">
-                      <label class="form-check-label" for="exampleCheck3">backfast & lunch $20 per day</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck4">
-                      <label class="form-check-label" for="exampleCheck4">car insurances</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck5">
-                      <label class="form-check-label" for="exampleCheck5">air-condition $35 per day</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck6">
-                      <label class="form-check-label" for="exampleCheck6">security & safety</label>
-                    </div>
-                  </div>
+                  {% endfor %}
+                  
 
                 </div>
                 <div class="row">
@@ -116,44 +88,28 @@
               </div>
               <div class="content-block">
                 <h3 class="title">personal information</h3>
-                {% if request.user.is_authenticated %}
-                  {% if request.user.customer_profile.all %}
-                    <div class="row">
-                      <div class="col-lg-6 form-group">
-                        {{ user.profile.first_name }} {{ user.profile.last_name }}
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        {{ user.email }}
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        {{ user.phone }}
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        {{ user.profile.city }}
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        {{ user.profile.zipcode }}
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        {{ user.profile.gender }}
-                      </div>
-                    </div>
-                  {% else %}
-                    <div class="row">
-                      <div class="col-lg-6 form-group">
-                      <a href="" class="btn btn-primary btn-block">Continue Shopping</a>
-                        
-                      </div>
-                    </div>
-                  {% endif %}
-                {% else %}
-                <div class="row">
-                      <div class="col-lg-6 form-group">
-                        <a href="{% url 'accounts:login' %}" class="btn btn-warining btn-block">Login</a>
-                      </div>
-                    </div>
 
-                {% endif %}
+
+                    <div class="row">
+                      <div class="col-lg-6 form-group">
+                        {{ request.user.profile.first_name }} {{ request.user.profile.last_name }}
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        {{ request.user.email }}
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        {{ request.user.phone }}
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        {{ request.user.profile.city }}
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        {{ request.user.profile.zipcode }}
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        {{ request.user.profile.gender }}
+                      </div>
+                    </div>
               </div>
               <div class="content-block">
                 <h3 class="title">payment method</h3>
@@ -161,7 +117,7 @@
                   <div class="col-lg-6 form-group">
                   <select>
                   {% for payment in form.payment_method %}
-                      <option>{{ payment }}</option>
+                      <option value="{{ payment }}"></option>
                     {% endfor %}
                     </select>
                   </div>
@@ -334,7 +290,7 @@
                 
                     <div class="row">
                       <div class="col-lg-6 form-group">
-                        {{ user.profile.first_name }} {{ user.profile.last_name }}
+                        {{ rquest.user.profile.first_name }} {{ user.profile.last_name }}
                       </div>
                       <div class="col-lg-6 form-group">
                         {{ user.email }}
@@ -419,10 +375,7 @@
   </div>
 </section>
 <!-- reservation-section end -->
-  {% else %}
-    404 পেজে নিয়ে যাবে
-  {% endif %}
-  
+
 
   
 
